@@ -13,26 +13,46 @@ struct GameView: View {
     // MARK: Stored properties
     @State var currentNodeId: Int = 1
     
+    // Keeps track of the position of the scroll view (source of truth, original value)
+    @State var reader: ScrollViewProxy?
+    
     // MARK: Computed properties
     var body: some View {
-        VStack(spacing: 10) {
-            
-            HStack {
-                Text("\(currentNodeId)")
-                    .font(.largeTitle)
-                Spacer()
-            }
-            
-            NodeView(currentNodeId: currentNodeId)
-            
-            Divider()
-            
-            EdgesView(currentNodeId: $currentNodeId)
+        
+        
+            VStack(spacing: 10) {
+                
+                HStack {
+                    Text("\(currentNodeId)")
+                        .font(.largeTitle)
+                    Spacer()
+                }
+                
+                ScrollView {
+                    
+                    ScrollViewReader { scrollViewProxy in
                         
-            Spacer()
+                        Text("")
+                            .id("top-of-page")
+                        
+                        NodeView(currentNodeId: currentNodeId)
+                            .onAppear {
+                                self.reader = scrollViewProxy
+                            }
+                        
+                        Divider()
+                        
+                        EdgesView(currentNodeId: $currentNodeId, proxy: $reader)
+                        
+                    }
+                    
+
+                }
+                                            
+            }
+            .padding()
             
-        }
-        .padding()
+        
     }
 }
 
