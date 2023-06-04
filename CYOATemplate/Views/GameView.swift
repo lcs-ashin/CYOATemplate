@@ -22,12 +22,6 @@ struct GameView: View {
         
             VStack(spacing: 10) {
                 
-                HStack {
-                    Text("\(currentNodeId)")
-                        .font(.largeTitle)
-                    Spacer()
-                }
-                
                 ScrollView {
                     
                     ScrollViewReader { scrollViewProxy in
