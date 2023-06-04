@@ -33,8 +33,7 @@ struct GameView: View {
                             .onAppear {
                                 self.reader = scrollViewProxy
                             }
-                        
-                        Divider()
+                            .padding(.bottom, 15)
                         
                         EdgesView(currentNodeId: $currentNodeId, proxy: $reader)
                         

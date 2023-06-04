@@ -31,6 +31,8 @@ struct NodeView: View {
             Text(try! AttributedString(markdown: node.narrative,
                                        options: AttributedString.MarkdownParsingOptions(interpretedSyntax:
                                                                                               .inlineOnlyPreservingWhitespace)))
+            .font(.custom("8bitOperatorPlus8-Bold", size: 17))
+            .lineSpacing(7)
         } else {
             Text("Node with id \(currentNodeId) not found; directed graph has a gap.")
         }
