@@ -46,21 +46,22 @@ struct EdgesView: View {
                         
                         // Show a Text view, but render Markdown syntax, ignoring newlines
                         Text(try! AttributedString(markdown: currentEdge.prompt))
-                            .multilineTextAlignment(.trailing)
-                            .padding(.horizontal, 30)
-                            .padding(.vertical, 5)
-                            .background(Color("EdgeColor"))
-                            .cornerRadius(7)
+                            .multilineTextAlignment(.center)
                             .foregroundColor(Color("CustomYellow"))
-                            .onTapGesture {
-                                currentNodeId = currentEdge.to_node_id
-                                
-                                // Ensure the scroll view goes back to the top after moving to a new node
-                                proxy?.scrollTo("top-of-page")
-                            }
+                            
+                        Spacer()
 
                     }
-                    .padding(.horizontal, 10)
+                    .padding(.vertical, 5)
+                    .background(Color("EdgeColor"))
+                    .cornerRadius(7)
+                    .padding(.horizontal, 15)
+                    .onTapGesture {
+                        currentNodeId = currentEdge.to_node_id
+                        
+                        // Ensure the scroll view goes back to the top after moving to a new node
+                        proxy?.scrollTo("top-of-page")
+                    }
 
                 }
 
