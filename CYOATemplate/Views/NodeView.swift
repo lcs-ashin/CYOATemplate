@@ -21,25 +21,60 @@ struct NodeView: View {
     // The list of nodes retrieved
     @BlackbirdLiveModels var nodes: Blackbird.LiveResults<Node>
     
+    // User's nickname
+    @State var nickname: String
+    
     // MARK: Computed properties
     
     // The user interface
     var body: some View {
         if let node = nodes.results.first {
+            
+            if currentNodeId == 2 {
+                
+                VStack {
+                    // Show a Text view, but render Markdown syntax, preserving newline characters
+                    Text(try! AttributedString(markdown: node.narrative,
+                                               options: AttributedString.MarkdownParsingOptions(interpretedSyntax:
+                                                                                                      .inlineOnlyPreservingWhitespace)))
+                    .font(.custom("8bitOperatorPlus8-Bold", size: 17))
+                    .lineSpacing(7)
+                    .padding(.bottom, 15)
+                    
+                    HStack {
+                        
+                        Spacer()
+                        
+                        TextField("Princess Mia", text: $nickname)
+                            .padding(.horizontal, 13)
+                            .padding(.vertical, 10)
+                            .border(Color("CustomYellow"), width: 7)
+                            .cornerRadius(7)
+                            .font(.custom("8bitOperatorPlus8-Bold", size: 20))
+                            
+                        Spacer()
+                        
+                    }
+                    
+                }
+                
+            } else {
+                
+                // Show a Text view, but render Markdown syntax, preserving newline characters
+                Text(try! AttributedString(markdown: node.narrative,
+                                           options: AttributedString.MarkdownParsingOptions(interpretedSyntax:
+                                                                                                  .inlineOnlyPreservingWhitespace)))
+                .font(.custom("8bitOperatorPlus8-Bold", size: 17))
+                .lineSpacing(7)
+            }
 
-            // Show a Text view, but render Markdown syntax, preserving newline characters
-            Text(try! AttributedString(markdown: node.narrative,
-                                       options: AttributedString.MarkdownParsingOptions(interpretedSyntax:
-                                                                                              .inlineOnlyPreservingWhitespace)))
-            .font(.custom("8bitOperatorPlus8-Bold", size: 17))
-            .lineSpacing(7)
         } else {
             Text("Node with id \(currentNodeId) not found; directed graph has a gap.")
         }
     }
     
     // MARK: Initializer
-    init(currentNodeId: Int) {
+    init(currentNodeId: Int, nickname: String) {
         
         // Retrieve rows that describe nodes in the directed graph
         // NOTE: There should only be one row for a given node_id
@@ -52,7 +87,7 @@ struct NodeView: View {
         
         // Set the node we are trying to view
         self.currentNodeId = currentNodeId
-        
+        self.nickname = nickname
     }
 
     
@@ -62,7 +97,7 @@ struct NodeView_Previews: PreviewProvider {
     
     static var previews: some View {
 
-        NodeView(currentNodeId: 1)
+        NodeView(currentNodeId: 1, nickname: "")
         // Make the database available to all other view through the environment
         .environment(\.blackbirdDatabase, AppDatabase.instance)
 
