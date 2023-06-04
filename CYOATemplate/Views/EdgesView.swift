@@ -28,6 +28,8 @@ struct EdgesView: View {
     // Keeps track of the position of the scroll view (derived value)
     @Binding var proxy: ScrollViewProxy?
     
+    // Colour of the choice boxes
+    @State var colorOfBox: Color = Color("EdgeColor")
     
     // MARK: Computed properties
     
@@ -39,31 +41,34 @@ struct EdgesView: View {
             if edges.results.count > 0 {
 
                 ForEach(edges.results) { currentEdge in
-
-                    HStack {
+                    
+                    Button(action: {
                         
-                        Spacer()
-                        
-                        // Show a Text view, but render Markdown syntax, ignoring newlines
-                        Text(try! AttributedString(markdown: currentEdge.prompt))
-                            .multilineTextAlignment(.center)
-                            .foregroundColor(Color("CustomYellow"))
-                            .font(.custom("8bitOperatorPlus8-Bold", size: 15))
-                            .lineSpacing(5)
-                            
-                        Spacer()
-
-                    }
-                    .padding(.vertical, 7)
-                    .background(Color("EdgeColor"))
-                    .cornerRadius(7)
-                    .padding(.horizontal, 15)
-                    .onTapGesture {
                         currentNodeId = currentEdge.to_node_id
                         
                         // Ensure the scroll view goes back to the top after moving to a new node
                         proxy?.scrollTo("top-of-page")
-                    }
+                        
+
+                    }, label: {
+                        
+                        HStack {
+                            
+                            Spacer()
+                            
+                            // Show a Text view, but render Markdown syntax, ignoring newlines
+                            Text(try! AttributedString(markdown: currentEdge.prompt))
+                                .multilineTextAlignment(.center)
+                                .foregroundColor(Color("CustomYellow"))
+                                .font(.custom("8bitOperatorPlus8-Bold", size: 15))
+                                .lineSpacing(5)
+                                
+                            Spacer()
+
+                        }
+                        
+                    })
+                    .buttonStyle(CustomizedButton())
 
                 }
 
