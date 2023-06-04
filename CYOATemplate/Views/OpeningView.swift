@@ -9,17 +9,18 @@ import SwiftUI
 
 struct OpeningView: View {
     
-    @State var currentNode: Bool = false
-    
+    @State var gameStart: Bool = false
+   
     var body: some View {
         
         
+        if gameStart == false {
             ZStack{
                 Image("MoonWall")
                     .resizable()
                     .scaledToFill()
                     .ignoresSafeArea(.all)
-                  
+                
                 
                 VStack{
                     
@@ -27,23 +28,27 @@ struct OpeningView: View {
                         .resizable()
                         .scaledToFit()
                         .frame(width: 350)
-                        
-                        
+                    
+                    
                     Button(action: {
-                        currentNode = true
+                        
+                        gameStart = true
+                        
+                        
                     }, label: {
                         Image("startbutton")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 200)
                     })
-
+                    .buttonStyle(StartButtonStyle())
+                    
                     
                     Image("PresentBy")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 150)
-                       
+                    
                     
                     Image("Shin")
                         .resizable()
@@ -58,9 +63,22 @@ struct OpeningView: View {
                 
             }
             
+        } else if gameStart == true {
+            GameView()
+        }
         
     }
 }
+
+struct StartButtonStyle: ButtonStyle {
+    
+    func makeBody(configuration: Self.Configuration) -> some View {
+        configuration.label
+            .scaleEffect(configuration.isPressed ? 0.9 : 1.0)
+    }
+    
+}
+
 
 struct OpeningView_Previews: PreviewProvider {
     static var previews: some View {
