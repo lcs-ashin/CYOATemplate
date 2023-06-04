@@ -45,7 +45,7 @@ struct NodeView: View {
                         
                         Spacer()
                         
-                        TextField("Princess Mia", text: $nickname)
+                        TextField("Anne Hathaway", text: $nickname)
                             .padding(.horizontal, 13)
                             .padding(.vertical, 10)
                             .border(Color("CustomYellow"), width: 7)
