@@ -49,11 +49,12 @@ struct EdgesView: View {
                             .multilineTextAlignment(.center)
                             .foregroundColor(Color("CustomYellow"))
                             .font(.custom("8bitOperatorPlus8-Bold", size: 15))
+                            .lineSpacing(5)
                             
                         Spacer()
 
                     }
-                    .padding(.vertical, 5)
+                    .padding(.vertical, 7)
                     .background(Color("EdgeColor"))
                     .cornerRadius(7)
                     .padding(.horizontal, 15)
