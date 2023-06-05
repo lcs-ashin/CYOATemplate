@@ -13,32 +13,59 @@ struct GameView: View {
     // MARK: Stored properties
     @State var currentNodeId: Int = 1
   //  @Binding var gameStart: Bool = false
+    
+    // Keeps track of the position of the scroll view (source of truth, original value)
+    @State var reader: ScrollViewProxy?
+    
+    @Binding var nickname: String
+    
     // MARK: Computed properties
     var body: some View {
-        VStack(spacing: 10) {
+        
+        ZStack {
             
-            HStack {
-                Text("\(currentNodeId)")
-                    .font(.largeTitle)
-                Spacer()
-            }
+            Image("Background")
+                .resizable()
+                .scaledToFill()
+                .edgesIgnoringSafeArea(.all)
             
-            NodeView(currentNodeId: currentNodeId)
-            
-            Divider()
-            
-            EdgesView(currentNodeId: $currentNodeId)
+            VStack(spacing: 10) {
+                
+                ScrollView {
+                    
+                    ScrollViewReader { scrollViewProxy in
                         
-            Spacer()
-            
+                        Text("")
+                            .id("top-of-page")
+                        
+                        NodeView(currentNodeId: currentNodeId, nickname: nickname)
+                            .onAppear {
+                                self.reader = scrollViewProxy
+                            }
+                            .padding(.bottom, 15)
+                        
+                        EdgesView(currentNodeId: $currentNodeId, proxy: $reader)
+                            .padding(.bottom, 15)
+                        
+                    }
+                    
+                }
+                                            
+            }
+            .padding()
+            .padding(.top, 100)
+            .padding(.bottom, 80)
         }
-        .padding()
+        
+            
+            
+        
     }
 }
 
 struct GameView_Previews: PreviewProvider {
     static var previews: some View {
-        GameView()
+        GameView(nickname: .constant(""))
         // Make the database available to all other view through the environment
         .environment(\.blackbirdDatabase, AppDatabase.instance)
     }

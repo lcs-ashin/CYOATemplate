@@ -25,6 +25,12 @@ struct EdgesView: View {
     // node to be changed from this view.
     @Binding var currentNodeId: Int
     
+    // Keeps track of the position of the scroll view (derived value)
+    @Binding var proxy: ScrollViewProxy?
+    
+    // Colour of the choice boxes
+    @State var colorOfBox: Color = Color("EdgeColor")
+    
     // MARK: Computed properties
     
     // The user interface
@@ -35,19 +41,34 @@ struct EdgesView: View {
             if edges.results.count > 0 {
 
                 ForEach(edges.results) { currentEdge in
-
-                    HStack {
+                    
+                    Button(action: {
                         
-                        Spacer()
+                        currentNodeId = currentEdge.to_node_id
                         
-                        // Show a Text view, but render Markdown syntax, ignoring newlines
-                        Text(try! AttributedString(markdown: currentEdge.prompt))
-                            .multilineTextAlignment(.trailing)
-                            .onTapGesture {
-                                currentNodeId = currentEdge.to_node_id
-                            }
+                        // Ensure the scroll view goes back to the top after moving to a new node
+                        proxy?.scrollTo("top-of-page")
+                        
 
-                    }
+                    }, label: {
+                        
+                        HStack {
+                            
+                            Spacer()
+                            
+                            // Show a Text view, but render Markdown syntax, ignoring newlines
+                            Text(try! AttributedString(markdown: currentEdge.prompt))
+                                .multilineTextAlignment(.center)
+                                .foregroundColor(Color("CustomYellow"))
+                                .font(.custom("8bitOperatorPlus8-Bold", size: 17))
+                                .lineSpacing(5)
+                                
+                            Spacer()
+
+                        }
+                        
+                    })
+                    .buttonStyle(CustomizedButton())
 
                 }
 
@@ -58,6 +79,9 @@ struct EdgesView: View {
                     Text("No edges found for node with \(currentNodeId).")
                         .onTapGesture {
                             currentNodeId = 1
+                            // Ensure the scroll view goes back to the top after moving to a new node
+                            proxy?.scrollTo("top-of-page")
+
                         }
                 }
             }
@@ -67,7 +91,7 @@ struct EdgesView: View {
     }
     
     // MARK: Initializer
-    init(currentNodeId: Binding<Int>) {
+    init(currentNodeId: Binding<Int>, proxy: Binding<ScrollViewProxy?>) {
         
         // Retrieve edges for the current node in the graph
         _edges = BlackbirdLiveModels({ db in
@@ -77,6 +101,10 @@ struct EdgesView: View {
         
         // Set the current node
         _currentNodeId = currentNodeId
+
+        // Set the scroll view position
+        _proxy = proxy
+
         
     }
 }
@@ -84,7 +112,7 @@ struct EdgesView: View {
 struct EdgesView_Previews: PreviewProvider {
     static var previews: some View {
 
-        EdgesView(currentNodeId: .constant(3))
+        EdgesView(currentNodeId: .constant(3), proxy: .constant(nil))
         // Make the database available to all other view through the environment
         .environment(\.blackbirdDatabase, AppDatabase.instance)
         
