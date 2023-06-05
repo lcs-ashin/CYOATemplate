@@ -21,7 +21,13 @@ struct GameView: View {
     // MARK: Computed properties
     var body: some View {
         
-        
+        ZStack {
+            
+            Image("Background")
+                .resizable()
+                .scaledToFill()
+                .edgesIgnoringSafeArea(.all)
+            
             VStack(spacing: 10) {
                 
                 ScrollView {
@@ -38,14 +44,19 @@ struct GameView: View {
                             .padding(.bottom, 15)
                         
                         EdgesView(currentNodeId: $currentNodeId, proxy: $reader)
+                            .padding(.bottom, 15)
                         
                     }
                     
-
                 }
                                             
             }
             .padding()
+            .padding(.top, 100)
+            .padding(.bottom, 80)
+        }
+        
+            
             
         
     }

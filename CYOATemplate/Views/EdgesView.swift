@@ -60,7 +60,7 @@ struct EdgesView: View {
                             Text(try! AttributedString(markdown: currentEdge.prompt))
                                 .multilineTextAlignment(.center)
                                 .foregroundColor(Color("CustomYellow"))
-                                .font(.custom("8bitOperatorPlus8-Bold", size: 15))
+                                .font(.custom("8bitOperatorPlus8-Bold", size: 17))
                                 .lineSpacing(5)
                                 
                             Spacer()
