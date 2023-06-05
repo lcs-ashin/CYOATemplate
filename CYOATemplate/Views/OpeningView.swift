@@ -32,7 +32,16 @@ struct OpeningView: View {
                     
                     Button(action: {
                         
-                        gameStart = true
+                        
+                        Task {
+                            try await Task.sleep(for: Duration.seconds(1))
+                            
+                            gameStart = true
+                        }
+                        
+                        
+                        
+                       
                         
                         
                     }, label: {
@@ -64,7 +73,7 @@ struct OpeningView: View {
             }
             
         } else if gameStart == true {
-            GameView()
+            GameView(nickname: .constant(""))
         }
         
     }
