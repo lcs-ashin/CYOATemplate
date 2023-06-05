@@ -16,17 +16,19 @@ struct GameView: View {
     // Keeps track of the position of the scroll view (source of truth, original value)
     @State var reader: ScrollViewProxy?
     
+    @Binding var nickname: String
+    
     // MARK: Computed properties
     var body: some View {
         
-        
+        ZStack {
+            
+            Image("Background")
+                .resizable()
+                .scaledToFill()
+                .edgesIgnoringSafeArea(.all)
+            
             VStack(spacing: 10) {
-                
-                HStack {
-                    Text("\(currentNodeId)")
-                        .font(.largeTitle)
-                    Spacer()
-                }
                 
                 ScrollView {
                     
@@ -35,22 +37,26 @@ struct GameView: View {
                         Text("")
                             .id("top-of-page")
                         
-                        NodeView(currentNodeId: currentNodeId)
+                        NodeView(currentNodeId: currentNodeId, nickname: nickname)
                             .onAppear {
                                 self.reader = scrollViewProxy
                             }
-                        
-                        Divider()
+                            .padding(.bottom, 15)
                         
                         EdgesView(currentNodeId: $currentNodeId, proxy: $reader)
+                            .padding(.bottom, 15)
                         
                     }
                     
-
                 }
                                             
             }
             .padding()
+            .padding(.top, 100)
+            .padding(.bottom, 80)
+        }
+        
+            
             
         
     }
@@ -58,7 +64,7 @@ struct GameView: View {
 
 struct GameView_Previews: PreviewProvider {
     static var previews: some View {
-        GameView()
+        GameView(nickname: .constant(""))
         // Make the database available to all other view through the environment
         .environment(\.blackbirdDatabase, AppDatabase.instance)
     }
