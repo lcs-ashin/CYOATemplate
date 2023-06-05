@@ -13,7 +13,8 @@ struct CYOATemplateApp: App {
         WindowGroup {
             GameView(nickname: .constant(""))
                 // Make the database available to all other view through the environment
-                .environment(\.blackbirdDatabase, AppDatabase.instance)
+              //  .environment(\.blackbirdDatabase, AppDatabase.instance)
+            OpeningView()
 
         }
     }

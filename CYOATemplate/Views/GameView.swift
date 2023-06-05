@@ -12,6 +12,7 @@ struct GameView: View {
     
     // MARK: Stored properties
     @State var currentNodeId: Int = 1
+  //  @Binding var gameStart: Bool = false
     
     // Keeps track of the position of the scroll view (source of truth, original value)
     @State var reader: ScrollViewProxy?
