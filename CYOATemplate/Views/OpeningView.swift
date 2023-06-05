@@ -10,7 +10,7 @@ import SwiftUI
 struct OpeningView: View {
     
     @State var gameStart: Bool = false
-   
+    
     var body: some View {
         
         
@@ -42,7 +42,7 @@ struct OpeningView: View {
                             .frame(width: 200)
                     })
                     .buttonStyle(StartButtonStyle())
-                    
+                   
                     
                     Image("PresentBy")
                         .resizable()
@@ -68,7 +68,9 @@ struct OpeningView: View {
         }
         
     }
+    
 }
+
 
 struct StartButtonStyle: ButtonStyle {
     

@@ -12,7 +12,7 @@ struct GameView: View {
     
     // MARK: Stored properties
     @State var currentNodeId: Int = 1
-    
+  //  @Binding var gameStart: Bool = false
     // MARK: Computed properties
     var body: some View {
         VStack(spacing: 10) {
