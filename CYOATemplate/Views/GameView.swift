@@ -12,7 +12,7 @@ struct GameView: View {
     
     // MARK: Stored properties
     @State var currentNodeId: Int = 1
-    //@Binding var gameStart: Bool
+    @State var gameMode: Bool = true
     
     // Keeps track of the position of the scroll view (source of truth, original value)
     @State var reader: ScrollViewProxy?
@@ -46,6 +46,35 @@ struct GameView: View {
                         
                         EdgesView(currentNodeId: $currentNodeId, proxy: $reader)
                             .padding(.bottom, 15)
+                        
+                        
+                        
+                        Button(action: {
+                            
+                            Task {
+                                try await Task.sleep(for: Duration.seconds(1))
+                                
+                                gameMode = false
+                                
+                            }
+                            
+                        }, label: {
+                            
+                            HStack{
+                                Spacer()
+                                Text("Back to Menu")
+                                Spacer()
+                            }
+                            
+                        })
+                        .buttonStyle(CustomizedButton())
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(Color("CustomYellow"))
+                        .font(.custom("8bitOperatorPlus8-Bold", size: 12))
+                        .lineSpacing(5)
+                        
+                        
+                        
                         
                     }
                     
