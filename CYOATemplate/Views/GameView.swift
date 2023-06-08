@@ -17,7 +17,7 @@ struct GameView: View {
     // Keeps track of the position of the scroll view (source of truth, original value)
     @State var reader: ScrollViewProxy?
     
-    @Binding var nickname: String
+    @Binding var userName: String
     
     // MARK: Computed properties
     var body: some View {
@@ -41,7 +41,7 @@ struct GameView: View {
                             Text("")
                                 .id("top-of-page")
                             
-                            NodeView(currentNodeId: currentNodeId, nickname: nickname)
+                            NodeView(currentNodeId: currentNodeId, userName: userName)
                                 .onAppear {
                                     self.reader = scrollViewProxy
                                 }
@@ -99,7 +99,7 @@ struct GameView: View {
 
 struct GameView_Previews: PreviewProvider {
     static var previews: some View {
-        GameView(nickname: .constant(""))
+        GameView(userName: .constant(""))
         // Make the database available to all other view through the environment
         .environment(\.blackbirdDatabase, AppDatabase.instance)
     }
