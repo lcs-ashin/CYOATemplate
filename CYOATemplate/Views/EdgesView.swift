@@ -36,7 +36,7 @@ struct EdgesView: View {
     // The user interface
     var body: some View {
         
-        VStack(spacing: 20) {
+        VStack(spacing: 7) {
 
             if edges.results.count > 0 {
 
