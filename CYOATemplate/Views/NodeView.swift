@@ -62,6 +62,7 @@ struct NodeView: View {
                     Image(imageToShow)
                         .resizable()
                         .scaledToFit()
+                        .padding(.top, 10)
                     
                 }
                 
