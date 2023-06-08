@@ -48,7 +48,7 @@ struct GameView: View {
                                 .padding(.bottom, 15)
                             
                             EdgesView(currentNodeId: $currentNodeId, proxy: $reader)
-                                .padding(.bottom, 15)
+                                
                             
                             
                             
