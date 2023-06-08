@@ -24,6 +24,8 @@ struct NodeView: View {
     // User's userName
     @State var userName: String
     
+ //   @State var text: String
+    
     // MARK: Computed properties
     
     // The user interface
@@ -33,11 +35,13 @@ struct NodeView: View {
             VStack {
                 
                 // Show a Text view, but render Markdown syntax, preserving newline characters
-                Text(try! AttributedString(markdown: node.narrative,
-                                           options: AttributedString.MarkdownParsingOptions(interpretedSyntax:
-                                                .inlineOnlyPreservingWhitespace)))
-                .font(.custom("8bitOperatorPlus8-Bold", size: 17))
-                .lineSpacing(7)
+                
+                let text = node.narrative
+                let replacedText = text.replacingOccurrences(of: "y/n", with: userName, options: .caseInsensitive)
+                
+                Text(replacedText)
+                    .font(.custom("8bitOperatorPlus8-Bold", size: 17))
+                    .lineSpacing(7)
                 
                 if currentNodeId == 2 {
                     
