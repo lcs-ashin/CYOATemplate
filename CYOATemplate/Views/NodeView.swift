@@ -14,7 +14,7 @@ struct NodeView: View {
     
     // The id of the node we are trying to view
     let currentNodeId: Int
-
+    
     // Needed to query database
     @Environment(\.blackbirdDatabase) var db: Blackbird.Database?
     
@@ -30,16 +30,16 @@ struct NodeView: View {
     var body: some View {
         if let node = nodes.results.first {
             
-            if currentNodeId == 2 {
+            VStack {
                 
-                VStack {
-                    // Show a Text view, but render Markdown syntax, preserving newline characters
-                    Text(try! AttributedString(markdown: node.narrative,
-                                               options: AttributedString.MarkdownParsingOptions(interpretedSyntax:
-                                                                                                      .inlineOnlyPreservingWhitespace)))
-                    .font(.custom("8bitOperatorPlus8-Bold", size: 17))
-                    .lineSpacing(7)
-                    .padding(.bottom, 15)
+                // Show a Text view, but render Markdown syntax, preserving newline characters
+                Text(try! AttributedString(markdown: node.narrative,
+                                           options: AttributedString.MarkdownParsingOptions(interpretedSyntax:
+                                                .inlineOnlyPreservingWhitespace)))
+                .font(.custom("8bitOperatorPlus8-Bold", size: 17))
+                .lineSpacing(7)
+                
+                if currentNodeId == 2 {
                     
                     HStack {
                         
@@ -51,23 +51,22 @@ struct NodeView: View {
                             .border(Color("CustomYellow"), width: 7)
                             .cornerRadius(7)
                             .font(.custom("8bitOperatorPlus8-Bold", size: 20))
-                            
+                        
                         Spacer()
                         
                     }
+                }
+                
+                if let imageToShow = node.image {
+                    
+                    Image(imageToShow)
+                        .resizable()
+                        .scaledToFit()
                     
                 }
                 
-            } else {
-                
-                // Show a Text view, but render Markdown syntax, preserving newline characters
-                Text(try! AttributedString(markdown: node.narrative,
-                                           options: AttributedString.MarkdownParsingOptions(interpretedSyntax:
-                                                                                                  .inlineOnlyPreservingWhitespace)))
-                .font(.custom("8bitOperatorPlus8-Bold", size: 17))
-                .lineSpacing(7)
             }
-
+            
         } else {
             Text("Node with id \(currentNodeId) not found; directed graph has a gap.")
         }
@@ -82,24 +81,24 @@ struct NodeView: View {
         //       in the Node table
         _nodes = BlackbirdLiveModels({ db in
             try await Node.read(from: db,
-                                    sqlWhere: "node_id = ?", "\(currentNodeId)")
+                                sqlWhere: "node_id = ?", "\(currentNodeId)")
         })
         
         // Set the node we are trying to view
         self.currentNodeId = currentNodeId
         self.nickname = nickname
     }
-
+    
     
 }
 
 struct NodeView_Previews: PreviewProvider {
     
     static var previews: some View {
-
+        
         NodeView(currentNodeId: 1, nickname: "")
         // Make the database available to all other view through the environment
-        .environment(\.blackbirdDatabase, AppDatabase.instance)
-
+            .environment(\.blackbirdDatabase, AppDatabase.instance)
+        
     }
 }
