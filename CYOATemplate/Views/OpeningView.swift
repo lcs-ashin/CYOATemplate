@@ -73,7 +73,7 @@ struct OpeningView: View {
             }
             
         } else if gameStart == true {
-            GameView(nickname: .constant(""))
+            GameView(userName: .constant(""))
         }
         
     }
