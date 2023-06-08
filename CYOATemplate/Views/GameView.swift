@@ -22,71 +22,76 @@ struct GameView: View {
     // MARK: Computed properties
     var body: some View {
         
-        ZStack {
+        
+        if gameMode == true {
             
-            Image("Background")
-                .resizable()
-                .scaledToFill()
-                .edgesIgnoringSafeArea(.all)
-            
-            VStack(spacing: 10) {
+            ZStack {
                 
-                ScrollView {
+                Image("Background")
+                    .resizable()
+                    .scaledToFill()
+                    .edgesIgnoringSafeArea(.all)
+                
+                VStack(spacing: 10) {
                     
-                    ScrollViewReader { scrollViewProxy in
+                    ScrollView {
                         
-                        Text("")
-                            .id("top-of-page")
-                        
-                        NodeView(currentNodeId: currentNodeId, nickname: nickname)
-                            .onAppear {
-                                self.reader = scrollViewProxy
-                            }
-                            .padding(.bottom, 15)
-                        
-                        EdgesView(currentNodeId: $currentNodeId, proxy: $reader)
-                            .padding(.bottom, 15)
-                        
-                        
-                        
-                        Button(action: {
+                        ScrollViewReader { scrollViewProxy in
                             
-                            Task {
-                                try await Task.sleep(for: Duration.seconds(1))
+                            Text("")
+                                .id("top-of-page")
+                            
+                            NodeView(currentNodeId: currentNodeId, nickname: nickname)
+                                .onAppear {
+                                    self.reader = scrollViewProxy
+                                }
+                                .padding(.bottom, 15)
+                            
+                            EdgesView(currentNodeId: $currentNodeId, proxy: $reader)
+                                .padding(.bottom, 15)
+                            
+                            
+                            
+                            Button(action: {
                                 
-                                gameMode = false
+                                Task {
+                                    try await Task.sleep(for: Duration.seconds(1))
+                                    
+                                    gameMode = false
+                                    
+                                }
                                 
-                            }
+                            }, label: {
+                                
+                                HStack{
+                                    Spacer()
+                                    Text("Back to Menu")
+                                    Spacer()
+                                }
+                                
+                            })
+                            .buttonStyle(CustomizedButton())
+                            .multilineTextAlignment(.center)
+                            .foregroundColor(Color("CustomYellow"))
+                            .font(.custom("8bitOperatorPlus8-Bold", size: 12))
+                            .lineSpacing(5)
                             
-                        }, label: {
                             
-                            HStack{
-                                Spacer()
-                                Text("Back to Menu")
-                                Spacer()
-                            }
                             
-                        })
-                        .buttonStyle(CustomizedButton())
-                        .multilineTextAlignment(.center)
-                        .foregroundColor(Color("CustomYellow"))
-                        .font(.custom("8bitOperatorPlus8-Bold", size: 12))
-                        .lineSpacing(5)
-                        
-                        
-                        
+                            
+                        }
                         
                     }
                     
                 }
-                                            
+                .padding()
+                .padding(.top, 100)
+                .padding(.bottom, 80)
             }
-            .padding()
-            .padding(.top, 100)
-            .padding(.bottom, 80)
-        }
-        
             
+        } else if gameMode == false {
+            OpeningView()
+        }
             
         
     }
