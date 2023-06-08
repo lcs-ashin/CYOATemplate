@@ -51,14 +51,16 @@ struct NodeView: View {
                         
                         TextField("Anne Hathaway", text: $userName)
                             .padding(.horizontal, 13)
-                            .padding(.vertical, 10)
-                            .border(Color("CustomYellow"), width: 7)
+                            .padding(.vertical, 15)
+                            .border(Color("border"), width: 7)
                             .cornerRadius(7)
                             .font(.custom("8bitOperatorPlus8-Bold", size: 20))
                         
                         Spacer()
                         
                     }
+                    .padding(.vertical, 5)
+                    
                 }
                 
                 if let imageToShow = node.image {
