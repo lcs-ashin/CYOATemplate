@@ -34,7 +34,7 @@ struct OpeningView: View {
                         
                         
                         Task {
-                            try await Task.sleep(for: Duration.seconds(1))
+                            try await Task.sleep(for: Duration.seconds(0.3))
                             
                             gameStart = true
                         }
@@ -73,7 +73,7 @@ struct OpeningView: View {
             }
             
         } else if gameStart == true {
-            GameView(nickname: .constant(""))
+            GameView(userName: .constant(""))
         }
         
     }

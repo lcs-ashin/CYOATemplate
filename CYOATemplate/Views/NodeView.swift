@@ -21,8 +21,10 @@ struct NodeView: View {
     // The list of nodes retrieved
     @BlackbirdLiveModels var nodes: Blackbird.LiveResults<Node>
     
-    // User's nickname
-    @State var nickname: String
+    // User's userName
+    @State var userName: String
+    
+ //   @State var text: String
     
     // MARK: Computed properties
     
@@ -33,11 +35,13 @@ struct NodeView: View {
             VStack {
                 
                 // Show a Text view, but render Markdown syntax, preserving newline characters
-                Text(try! AttributedString(markdown: node.narrative,
-                                           options: AttributedString.MarkdownParsingOptions(interpretedSyntax:
-                                                .inlineOnlyPreservingWhitespace)))
-                .font(.custom("8bitOperatorPlus8-Bold", size: 17))
-                .lineSpacing(7)
+                
+                let text = node.narrative
+                let replacedText = text.replacingOccurrences(of: "y/n", with: userName, options: .caseInsensitive)
+                
+                Text(replacedText)
+                    .font(.custom("8bitOperatorPlus8-Bold", size: 17))
+                    .lineSpacing(7)
                 
                 if currentNodeId == 2 {
                     
@@ -45,16 +49,18 @@ struct NodeView: View {
                         
                         Spacer()
                         
-                        TextField("Anne Hathaway", text: $nickname)
+                        TextField("Anne Hathaway", text: $userName)
                             .padding(.horizontal, 13)
-                            .padding(.vertical, 10)
-                            .border(Color("CustomYellow"), width: 7)
+                            .padding(.vertical, 15)
+                            .border(Color("border"), width: 7)
                             .cornerRadius(7)
                             .font(.custom("8bitOperatorPlus8-Bold", size: 20))
                         
                         Spacer()
                         
                     }
+                    .padding(.vertical, 5)
+                    
                 }
                 
                 if let imageToShow = node.image {
@@ -74,7 +80,7 @@ struct NodeView: View {
     }
     
     // MARK: Initializer
-    init(currentNodeId: Int, nickname: String) {
+    init(currentNodeId: Int, userName: String) {
         
         // Retrieve rows that describe nodes in the directed graph
         // NOTE: There should only be one row for a given node_id
@@ -87,7 +93,7 @@ struct NodeView: View {
         
         // Set the node we are trying to view
         self.currentNodeId = currentNodeId
-        self.nickname = nickname
+        self.userName = userName
     }
     
     
@@ -97,7 +103,7 @@ struct NodeView_Previews: PreviewProvider {
     
     static var previews: some View {
         
-        NodeView(currentNodeId: 1, nickname: "")
+        NodeView(currentNodeId: 1, userName: "")
         // Make the database available to all other view through the environment
             .environment(\.blackbirdDatabase, AppDatabase.instance)
         
