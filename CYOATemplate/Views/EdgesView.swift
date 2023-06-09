@@ -44,12 +44,17 @@ struct EdgesView: View {
                     
                     Button(action: {
                         
-                        currentNodeId = currentEdge.to_node_id
+                        Task {
+                            
+                            try await Task.sleep(for: Duration.seconds(0.3))
+                            
+                            currentNodeId = currentEdge.to_node_id
+                            
+                            // Ensure the scroll view goes back to the top after moving to a new node
+                            proxy?.scrollTo("top-of-page")
+                            
+                        }
                         
-                        // Ensure the scroll view goes back to the top after moving to a new node
-                        proxy?.scrollTo("top-of-page")
-                        
-
                     }, label: {
                         
                         HStack {

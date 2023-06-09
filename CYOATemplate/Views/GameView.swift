@@ -55,7 +55,7 @@ struct GameView: View {
                             Button(action: {
                                 
                                 Task {
-                                    try await Task.sleep(for: Duration.seconds(1))
+                                    try await Task.sleep(for: Duration.seconds(0.3))
                                     
                                     gameMode = false
                                     
@@ -86,7 +86,7 @@ struct GameView: View {
                 }
                 .padding()
                 .padding(.top, 100)
-                .padding(.bottom, 80)
+                .padding(.bottom, 90)
             }
             
         } else if gameMode == false {
