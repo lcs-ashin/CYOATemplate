@@ -86,7 +86,7 @@ struct GameView: View {
                 }
                 .padding()
                 .padding(.top, 100)
-                .padding(.bottom, 80)
+                .padding(.bottom, 90)
             }
             
         } else if gameMode == false {
