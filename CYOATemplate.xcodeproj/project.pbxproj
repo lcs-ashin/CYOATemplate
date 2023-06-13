@@ -18,8 +18,8 @@
 		81C784A62A28AADA001BC867 /* Blackbird in Frameworks */ = {isa = PBXBuildFile; productRef = 81C784A52A28AADA001BC867 /* Blackbird */; };
 		81C784A92A28AB38001BC867 /* AppDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C784A82A28AB38001BC867 /* AppDatabase.swift */; };
 		81C784AB2A28AD0B001BC867 /* NodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C784AA2A28AD0B001BC867 /* NodeView.swift */; };
-		81C784AD2A28B1D6001BC867 /* db.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 81C784AC2A28B1D6001BC867 /* db.sqlite */; };
 		81C784AF2A28B4E7001BC867 /* EdgesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C784AE2A28B4E7001BC867 /* EdgesView.swift */; };
+		8A09E5D22A38E8CD00C649D6 /* db.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 8A09E5D12A38E8CD00C649D6 /* db.sqlite */; };
 		8A98240E2A2D16CC0042F259 /* 8bitOperatorPlus8-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8A98240D2A2D16CC0042F259 /* 8bitOperatorPlus8-Bold.ttf */; };
 		8A9824132A2D25190042F259 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9824122A2D25190042F259 /* Button.swift */; };
 /* End PBXBuildFile section */
@@ -36,8 +36,8 @@
 		81C198BE2A251B4D0047A4B3 /* Ending.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ending.swift; sourceTree = "<group>"; };
 		81C784A82A28AB38001BC867 /* AppDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDatabase.swift; sourceTree = "<group>"; };
 		81C784AA2A28AD0B001BC867 /* NodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeView.swift; sourceTree = "<group>"; };
-		81C784AC2A28B1D6001BC867 /* db.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = db.sqlite; sourceTree = "<group>"; };
 		81C784AE2A28B4E7001BC867 /* EdgesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgesView.swift; sourceTree = "<group>"; };
+		8A09E5D12A38E8CD00C649D6 /* db.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = db.sqlite; sourceTree = "<group>"; };
 		8A98240D2A2D16CC0042F259 /* 8bitOperatorPlus8-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "8bitOperatorPlus8-Bold.ttf"; sourceTree = "<group>"; };
 		8A98240F2A2D16EE0042F259 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8A9824122A2D25190042F259 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
@@ -97,7 +97,7 @@
 		81C198B62A251ACD0047A4B3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				81C784AC2A28B1D6001BC867 /* db.sqlite */,
+				8A09E5D12A38E8CD00C649D6 /* db.sqlite */,
 				81C198BA2A251B1B0047A4B3 /* Node.swift */,
 				81C198BC2A251B2B0047A4B3 /* Edge.swift */,
 				81C198BE2A251B4D0047A4B3 /* Ending.swift */,
@@ -198,9 +198,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				81C198B02A251ABC0047A4B3 /* Preview Assets.xcassets in Resources */,
-				81C784AD2A28B1D6001BC867 /* db.sqlite in Resources */,
 				81C198AD2A251ABC0047A4B3 /* Assets.xcassets in Resources */,
 				8A98240E2A2D16CC0042F259 /* 8bitOperatorPlus8-Bold.ttf in Resources */,
+				8A09E5D22A38E8CD00C649D6 /* db.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -349,7 +349,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"CYOATemplate/Preview Content\"";
-				DEVELOPMENT_TEAM = 4UG443984D;
+				DEVELOPMENT_TEAM = 8URKC69Y69;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CYOATemplate/Info.plist;
@@ -365,7 +365,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = ca.russellgordon.CYOATemplate;
+				PRODUCT_BUNDLE_IDENTIFIER = ca.shinamy.CYOATemplate;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -381,7 +381,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"CYOATemplate/Preview Content\"";
-				DEVELOPMENT_TEAM = 4UG443984D;
+				DEVELOPMENT_TEAM = 8URKC69Y69;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CYOATemplate/Info.plist;
@@ -397,7 +397,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = ca.russellgordon.CYOATemplate;
+				PRODUCT_BUNDLE_IDENTIFIER = ca.shinamy.CYOATemplate;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
